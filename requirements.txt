@@ -1,0 +1,9 @@
+langchain
+langchain_community
+langchain_core
+streamlit==1.30.0
+chromadb==0.4.20
+beautifulsoup4==4.12.2
+sentence-transformers
+langchain-huggingface
+dotenv
