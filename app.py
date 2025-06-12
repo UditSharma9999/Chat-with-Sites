@@ -21,8 +21,11 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 # ========================================================================== #
 
 
-#dotenv.load_dotenv()
-os.getenv('API_TOKEN')
+# #dotenv.load_dotenv()
+# os.getenv('API_TOKEN')
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+hf_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
 
 def get_vectorstore_from_url(url):
     # get the text in document form
@@ -45,7 +48,7 @@ def get_context_retriever_chain(vector_store):
     repo_id="HuggingFaceH4/zephyr-7b-beta",
     task="text-generation",
     max_new_tokens=512,
-    huggingfacehub_api_token = os.getenv('API_TOKEN')
+    huggingfacehub_api_token = hf_token,
     )
     retriever = vector_store.as_retriever()
     
@@ -63,7 +66,9 @@ def get_conversational_rag_chain(retriever_chain):
     llm = HuggingFaceEndpoint(
     repo_id="HuggingFaceH4/zephyr-7b-beta",
     task="text-generation",
-    max_new_tokens=512)
+    max_new_tokens=512,
+    huggingfacehub_api_token = hf_token,
+    )
     prompt = ChatPromptTemplate.from_messages([
       ("system", "Answer the user's questions based on the below context:\n\n{context}"),
       MessagesPlaceholder(variable_name="chat_history"),
