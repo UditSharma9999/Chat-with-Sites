@@ -37,7 +37,8 @@ def get_vectorstore_from_url(url):
     document_chunks = text_splitter.split_documents(document)
     
     # create a vectorstore from the chunks
-    embedding = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
+    # embedding = HuggingFaceEmbeddings(model_name="BAAI/bge-large-zh-v1.5")
+    embedding = HuggingFaceEmbeddings(model_name="Qwen/Qwen2.5-7B-Instruct")
     vector_store = Chroma.from_documents(document_chunks, embedding)
 
     return vector_store
@@ -128,3 +129,4 @@ else:
         elif isinstance(message, HumanMessage):
             with st.chat_message("Human"):
                 st.write(message.content)
+
