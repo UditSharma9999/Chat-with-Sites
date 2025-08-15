@@ -46,7 +46,8 @@ def get_vectorstore_from_url(url):
 def get_context_retriever_chain(vector_store):
 
     llm = HuggingFaceEndpoint(
-    repo_id="HuggingFaceH4/zephyr-7b-beta",
+    # repo_id="HuggingFaceH4/zephyr-7b-beta",
+    repo_id="Qwen/Qwen2.5-7B-Instruct",
     task="text-generation",
     max_new_tokens=512,
     huggingfacehub_api_token = hf_token,
@@ -65,7 +66,8 @@ def get_context_retriever_chain(vector_store):
     
 def get_conversational_rag_chain(retriever_chain): 
     llm = HuggingFaceEndpoint(
-    repo_id="HuggingFaceH4/zephyr-7b-beta",
+    # repo_id="HuggingFaceH4/zephyr-7b-beta",
+    repo_id="Qwen/Qwen2.5-7B-Instruct",
     task="text-generation",
     max_new_tokens=512,
     huggingfacehub_api_token = hf_token,
@@ -129,5 +131,6 @@ else:
         elif isinstance(message, HumanMessage):
             with st.chat_message("Human"):
                 st.write(message.content)
+
 
 
